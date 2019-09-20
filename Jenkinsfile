@@ -27,8 +27,8 @@ pipeline{
 
                         # Step 2:
                         # Authenticate & tag
-                        echo "Docker ID and Image: $dockerpath"
-                        docker login
+                        #echo "Docker ID and Image: $dockerpath"
+                        #docker login
                         docker tag cloudcapstone $dockerpath
 
                         # Step 3:
