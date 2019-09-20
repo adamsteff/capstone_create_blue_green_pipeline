@@ -31,6 +31,7 @@ pipeline{
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh 'echo "Set current kubectl context to the cluster..."'
+                    sh 'export KUBECONFIG=~/.kube/config'
                     sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
                 }
             }
