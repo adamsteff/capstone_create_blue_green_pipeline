@@ -2,7 +2,7 @@
 $variable = "Hello World";
 ?>
 
-
+<!doctype html>
 <html>
 <head>
     <title>Hello World</title>
