@@ -20,13 +20,19 @@ pipeline{
            steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
-
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                         docker push adamsteff/cloudcapstone:$BUILD_ID
-
                     '''
                 }
 
+            }
+        }
+        stage('Set current kubectl context to the cluster') {
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'echo "Set current kubectl context to the cluster"'
+                    sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
+                }
             }
         }
     }
