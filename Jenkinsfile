@@ -21,19 +21,8 @@ pipeline{
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
 
-                        # Step 1:
-                        # Create dockerpath
-                         dockerpath=adamsteff/cloudcapstone
-
-                        # Step 2:
-                        # Authenticate & tag
-                        #echo "Docker ID and Image: $dockerpath"
-                        #docker login
-                        docker tag cloudcapstone $dockerpath
-
-                        # Step 3:
-                        # Push image to a docker repository
-                        docker push $dockerpath
+                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                        docker push adamsteff/cloudcapstone:$BUILD_ID
 
                     '''
                 }
