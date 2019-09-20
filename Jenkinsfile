@@ -23,7 +23,7 @@ pipeline{
 
                         # Step 1:
                         # Create dockerpath
-                         dockerpath=adamsteff/cloudcapstone:$BUILD_ID
+                         dockerpath=adamsteff/cloudcapstone
 
                         # Step 2:
                         # Authenticate & tag
@@ -33,7 +33,7 @@ pipeline{
 
                         # Step 3:
                         # Push image to a docker repository
-                        docker push adamsteff/cloudcapstone:$BUILD_ID
+                        docker push $dockerpath
 
                     '''
                 }
