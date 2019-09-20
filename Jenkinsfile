@@ -29,7 +29,7 @@ pipeline{
                         # Authenticate & tag
                         #echo "Docker ID and Image: $dockerpath"
                         #docker login
-                        #docker tag cloudcapstone $dockerpath
+                        docker tag cloudcapstone $dockerpath
 
                         # Step 3:
                         # Push image to a docker repository
