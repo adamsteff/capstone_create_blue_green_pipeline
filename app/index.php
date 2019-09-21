@@ -1,5 +1,5 @@
 <?php
-$variable = "Hello World";
+$variable = "Hello World this is the blue release";
 ?>
 
 <!doctype html>
@@ -7,7 +7,7 @@ $variable = "Hello World";
 <head>
     <title>Hello World</title>
 </head>
-<body>
+<body style="color='blue'">
 <?php echo $variable;?>
 </body>
 </html>
