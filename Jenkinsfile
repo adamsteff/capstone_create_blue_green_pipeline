@@ -27,14 +27,6 @@ pipeline{
 
             }
         }
-        stage('Create a kubectl configuration file') {
-            steps{
-                withAWS(region:'ap-southeast-2',credentials:'aws') {
-                    sh 'echo "Create a kubectl configuration file"'
-                    sh 'aws eks --region ap-southeast-2 update-kubeconfig --name capstonecluster'
-                }
-            }
-        }
         stage('Set Kubectl Context to Cluster') {
             steps{
                 sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
