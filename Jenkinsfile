@@ -38,12 +38,8 @@ pipeline{
             }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
-                    sh '''
-                        ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./blue-controller.json
-                        cat ./green-controller.json
-                    '''
                     sh 'kubectl apply -f ./blue-controller.json'
-                    sh 'kubectl rolling-update blueversion --image=adamsteff/capstone-blue:latest'
+
                 }
             }
         }
@@ -53,12 +49,8 @@ pipeline{
             }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
-                    sh '''
-                        ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./green-controller.json
-                        cat ./green-controller.json
-                    '''
                     sh 'kubectl apply -f ./green-controller.json'
-                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
+
                 }
             }
         }
