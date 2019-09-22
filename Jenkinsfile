@@ -44,7 +44,7 @@ pipeline{
         }
         stage('Deploy to Production?') {
               when {
-                expression { env.BRANCH_NAME == 'master' }
+                expression { env.BRANCH_NAME != 'master' }
               }
 
               steps {
@@ -54,5 +54,16 @@ pipeline{
                 milestone(2)
               }
         }
+        stage('Create Blue-Green service') {
+            when {
+                expression { env.BRANCH_NAME != 'master' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl apply -f ./blue-green-service.json'
+                }
+            }
+        }
+
     }
 }
