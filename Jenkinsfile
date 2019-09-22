@@ -10,7 +10,7 @@ pipeline{
            steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
-                        docker build --no-cache -t adamsteff/capstonerepository:$BUILD_ID .
+                        docker build --no-cache -t adamsteff/capstone-green:$BUILD_ID .
                     '''
                 }
 
@@ -21,7 +21,7 @@ pipeline{
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        docker push adamsteff/capstonerepository:$BUILD_ID
+                        docker push adamsteff/capstone-green:$BUILD_ID
                     '''
                 }
 

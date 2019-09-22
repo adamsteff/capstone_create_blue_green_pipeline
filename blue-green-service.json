@@ -2,10 +2,8 @@
   "kind":"Service",
   "apiVersion":"v1",
   "metadata":{
-    "name":"bluegreenlb4s",
+    "name":"bluegreenlb",
     "annotations":{
-      "service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled" : "true",
-      "service.beta.kubernetes.io/aws-load-balancer-connection-draining-timeout" : "60",
       "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags" : "Capstone bluegreen LB",
       "service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold" : "5",
       "service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold" : "10",
@@ -25,7 +23,7 @@
       }
     ],
     "selector":{
-      "app":"green-7"
+      "app":"greenbuild"
     },
     "type": "LoadBalancer"
   }

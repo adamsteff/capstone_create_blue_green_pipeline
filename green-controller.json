@@ -2,27 +2,27 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "green-7",
+    "name": "greenbuild",
     "labels": {
-      "app": "green-7"
+      "app": "greenbuild"
     }
   },
   "spec": {
     "replicas": 1,
     "selector": {
-      "app": "green-7"
+      "app": "greenbuild"
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "green-7"
+          "app": "greenbuild"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "green-7",
-            "image": "adamsteff/capstonerepository:BUILD_ID",
+            "name": "greenbuild",
+            "image": "adamsteff/capstone-green:BUILD_ID",
             "ports": [
               {
                 "name": "http-server",
