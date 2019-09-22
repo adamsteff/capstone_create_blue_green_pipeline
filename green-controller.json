@@ -1,0 +1,37 @@
+{
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "greenversion",
+    "labels": {
+      "app": "greenversion"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "app": "greenversion"
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "greenversion"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "greenversion",
+            "image": "adamsteff/capstonerepository",
+            "ports": [
+              {
+                "name": "http-server",
+                "containerPort": 80
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

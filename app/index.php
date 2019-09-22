@@ -1,13 +1,16 @@
 <?php
-$variable = "Hello World";
+$variable = "Hello Udacity this is my green release!!! My name is Adam Steff";
 ?>
 
 <!doctype html>
 <html>
 <head>
-    <title>Hello World</title>
+    <title>Capstone project</title>
 </head>
-<body>
-<?php echo $variable;?>
+<body style="color='green' text-align='center' ">
+<h1 style="color: green">
+
+    <?php echo $variable;?>
+</h1>
 </body>
 </html>
