@@ -2,7 +2,7 @@
   "kind":"Service",
   "apiVersion":"v1",
   "metadata":{
-    "name":"bluegreenlb4",
+    "name":"bluegreenlb4s",
     "annotations":{
       "service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled" : "true",
       "service.beta.kubernetes.io/aws-load-balancer-connection-draining-timeout" : "60",
