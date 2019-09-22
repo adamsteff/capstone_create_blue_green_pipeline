@@ -33,9 +33,6 @@ pipeline{
         }
 
         stage('Create Staging Controller') {
-            when {
-                expression { env.BRANCH_NAME == 'master' }
-            }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh 'kubectl apply -f ./staging-controller.json'
@@ -44,9 +41,6 @@ pipeline{
             }
         }
         stage('Rollout Staging Changes') {
-            when {
-                expression { env.BRANCH_NAME == 'master' }
-            }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh 'kubectl rolling-update staging --image=adamsteff/capstonerepository:latest'
@@ -54,9 +48,6 @@ pipeline{
             }
         }
         stage('Create Staging service') {
-            when {
-                expression { env.BRANCH_NAME == 'master' }
-            }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){

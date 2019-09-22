@@ -23,7 +23,7 @@
       }
     ],
     "selector":{
-      "app":"blueversion"
+      "app":"greenversion"
     },
     "type": "LoadBalancer"
   }
