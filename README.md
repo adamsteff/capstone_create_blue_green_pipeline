@@ -8,7 +8,8 @@ In terms of the type of application this pipeline is deploying I've decided to c
 ## Installation
 In order to run this CI/CD pipeline, you will first need access to **Jenkins**, and have an **AWS** account. You will also need to install the **Blue Ocean** and **AWS pipeline** plugins.
 
-Once you have your Jenkins and AWS environments setup you will need to first run my #Create cluster pipeline# which can be found [Here](https://github.com/adamsteff/capstone_create_cluster_pipeline) 
+Once you have your Jenkins and AWS environments setup you will need to first run my #Create cluster pipeline# which can be found [here](https://github.com/adamsteff/capstone_create_cluster_pipeline) 
+- https://github.com/adamsteff/capstone_create_cluster_pipeline
 
 The #Create cluster pipeline# uses eksctl to create an AWS EKS cluster through CloudFormation. This CloudFormation Scripts can be found in that repository.
 
