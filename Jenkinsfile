@@ -31,6 +31,46 @@ pipeline{
                 sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
             }
         }
+
+        stage('Create Staging Controller') {
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl apply -f ./staging-controller.json'
+
+                }
+            }
+        }
+        stage('Rollout Staging Changes') {
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl rolling-update staging --image=adamsteff/capstonerepository:latest'
+                }
+            }
+        }
+        stage('Create Blue-Green service') {
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                        sh 'kubectl apply -f ./staging-service.json'
+                        sh 'kubectl get pods'
+                        sh 'kubectl describe service staginglb'
+                    }
+                }
+            }
+        }
+        stage('Deploy to Production?') {
+              when {
+                expression { env.BRANCH_NAME != 'master' }
+              }
+
+              steps {
+                // Prevent any older builds from deploying to production
+                milestone(1)
+                input 'Deploy to Production?'
+                milestone(2)
+              }
+        }
         stage('Create Blue Controller') {
             when {
                 expression { env.BRANCH_NAME == 'blue' }
@@ -52,18 +92,6 @@ pipeline{
 
                 }
             }
-        }
-        stage('Deploy to Production?') {
-              when {
-                expression { env.BRANCH_NAME != 'master' }
-              }
-
-              steps {
-                // Prevent any older builds from deploying to production
-                milestone(1)
-                input 'Deploy to Production?'
-                milestone(2)
-              }
         }
         stage('Rollout Blue Changes') {
             when {

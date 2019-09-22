@@ -1,0 +1,30 @@
+{
+  "kind":"Service",
+  "apiVersion":"v1",
+  "metadata":{
+    "name":"staginglb",
+    "annotations":{
+      "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags" : "Capstone Staging LB",
+      "service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold" : "5",
+      "service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold" : "10",
+      "service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval": "60",
+      "service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout": "30"
+
+    },
+    "labels":{
+      "app":"staginglb"
+    }
+  },
+  "spec":{
+    "ports": [
+      {
+        "port":8000,
+        "targetPort":80
+      }
+    ],
+    "selector":{
+      "app":"staging"
+    },
+    "type": "LoadBalancer"
+  }
+}
