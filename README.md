@@ -8,7 +8,7 @@ In order to run this CI/CD pipeline you will first need access to **Jenkins**, a
 
 Once you have your Jenkins and AWS enviroments setup you will need to first run my #Create cluster pipeline# which can be found [Here].(https://github.com/adamsteff/capstone_create_cluster_pipeline) 
 
-## Usage
+## Overview
 The pipeline has been designed so when code changes are made to the different branches the step run will are conditional.
 The steps in the pipeline are as follows.
 
@@ -42,15 +42,35 @@ This step rolls out the last changes which were just push to DockerHub to the gr
 ### Create Blue-Green service
 This steps applies the change to loadblancer by running `kubectl apply -f ./blue-green-service.json`
 
+## Usage
+
 ### Master Branch
-When you code change are commited and push in the master branch the follow steps will occur.
+- When your code change are commited and push in the master branch the follow steps will occur.
+- Lint HTML
+- Build Docker Image
+- Push Docker Image
+- Set Kubectl Context to Cluster
+
+All the other steps in the pipeline are skipped and no upates to the website will be made.
+
+### Blue Branch
+When your code change are commited and push in the blue branch the follow steps will occur.
 Lint HTML
 Build Docker Image
 Push Docker Image
 Set Kubectl Context to Cluster
+Create Blue Controller
+Deploy to Production
+Rollout Blue Changes
+Create Blue-Green service
 
-All the other steps in the pipeline are skipped and no upates to the website will be made.
-
-
-### Blue Branch
- 
+### Green Branch
+When your code change are commited and push in the green branch the follow steps will occur.
+Lint HTML
+Build Docker Image
+Push Docker Image
+Set Kubectl Context to Cluster
+Create Green Controller
+Deploy to Production
+Rollout Green Changes
+Create Blue-Green service
