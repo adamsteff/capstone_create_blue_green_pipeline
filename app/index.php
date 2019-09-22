@@ -1,5 +1,5 @@
 <?php
-$variable = "Hello Udacity this is my green release updated";
+$variable = "Hello Udacity this is my green release!";
 ?>
 
 <!doctype html>

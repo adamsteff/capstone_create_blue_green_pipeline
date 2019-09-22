@@ -48,20 +48,20 @@ pipeline{
             }
         }
         stage('Create Green Controller') {
-                    when {
-                        expression { env.BRANCH_NAME == 'green' }
-                    }
-                    steps{
-                        withAWS(region:'ap-southeast-2',credentials:'aws') {
-                            sh '''
-                                ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./green-controller.json
-                                cat ./green-controller.json
-                            '''
-                            sh 'kubectl apply -f ./green-controller.json'
-                             sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
-                        }
-                    }
+            when {
+                expression { env.BRANCH_NAME == 'green' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh '''
+                        ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./green-controller.json
+                        cat ./green-controller.json
+                    '''
+                    sh 'kubectl apply -f ./green-controller.json'
+                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
                 }
+            }
+        }
         stage('Deploy to Production?') {
               when {
                 expression { env.BRANCH_NAME != 'master' }
@@ -73,6 +73,26 @@ pipeline{
                 input 'Deploy to Production?'
                 milestone(2)
               }
+        }
+        stage('Rollout Blue Changes') {
+            when {
+                expression { env.BRANCH_NAME == 'blue' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl rolling-update blueversion --image=adamsteff/capstone-blue:latest'
+                }
+            }
+        }
+        stage('Rollout Green Changes') {
+            when {
+                expression { env.BRANCH_NAME == 'green' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
+                }
+            }
         }
         stage('Create Blue-Green service') {
             when {
