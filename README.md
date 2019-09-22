@@ -3,7 +3,7 @@
 ## Project Overview
 In this project, we had to build a CI/CD pipeline for a microservices application. I've designed this CI/CD pipeline to work with Jenkins, and it follows this blue/green deployment methodology. This project has **three** braches **master**, **blue** & **green**.
 
-In terms of the type of application this pipeline is deploying I've decided to create a simple **PHP** application which is built into a docker image. My reasons for this is I'm application development by trade, and we build our API in **PHP**.
+In terms of the type of application this pipeline is deploying, I decided to create a simple **PHP** application which is built into a docker image. My reasons for this is I'm application development by trade, and we build our API in **PHP**.
 
 ## Installation
 In order to run this CI/CD pipeline, you will first need access to **Jenkins**, and have an **AWS** account. You will also need to install the **Blue Ocean** and **AWS pipeline** plugins.
@@ -14,11 +14,10 @@ Once you have your Jenkins and AWS environments setup you will need to first run
 The #Create cluster pipeline# uses eksctl to create an AWS EKS cluster through CloudFormation. This CloudFormation Scripts can be found in that repository.
 
 ## Overview
-The pipeline has been designed so when code changes are made to the different branches. The step run will are conditional.
-The steps in the pipeline are as follows.
+The pipeline has been designed so when code changes are made to the different branches, the steps will run in a conditional format. The steps in the pipeline are as follows:
 
 ### Lint HTML
-This step is used to makes sure there is no syntax error in the code
+This step is used to makes sure there is no syntax error in the .php files
 
 ### Build Docker Image
 This step builds a new docker image of the website
@@ -50,7 +49,7 @@ This steps applies the change to load balancer by running `kubectl apply -f ./bl
 ## Usage
 
 ### Master Branch
-When your code changes are committed and push in the master branch, the following steps will occur.
+When your code changes are committed and pushed in the master branch, the following steps will occur:
 - Lint HTML
 - Build Docker Image
 - Push Docker Image
@@ -59,7 +58,7 @@ When your code changes are committed and push in the master branch, the followin
 All the other steps in the pipeline are skipped, and no updates to the website will be made.
 
 ### Blue Branch
-When your code changes are committed and push in the blue branch, the following steps will occur.
+When your code changes are committed and pushed in the blue branch, the following steps will occur:
 - Lint HTML
 - Build Docker Image
 - Push Docker Image
@@ -67,10 +66,10 @@ When your code changes are committed and push in the blue branch, the following 
 - Create Blue Controller
 - Deploy to Production
 - Rollout Blue Changes
-- Create Blue-Green service - the load balancer will be pointed to the blue pods
+- Create Blue-Green service - the load balancer will point to the blue pods
 
 ### Green Branch
-When your code changes are committed and push in the green branch, the following steps will occur.
+When your code changes are committed and pushed in the green branch, the following steps will occur.
 - Lint HTML
 - Build Docker Image
 - Push Docker Image
@@ -78,4 +77,4 @@ When your code changes are committed and push in the green branch, the following
 - Create Green Controller
 - Deploy to Production
 - Rollout Green Changes
-- Create Blue-Green service - the load balancer will be pointed to the green pods
+- Create Blue-Green service - the load balancer will point to the green pods
