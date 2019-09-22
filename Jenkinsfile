@@ -61,20 +61,10 @@ pipeline{
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh 'kubectl apply -f ./blue-green-service.json'
-                }
-            }
-
-        }
-        stage('Create Blue-Green service') {
-            when {
-                expression { env.BRANCH_NAME != 'master' }
-            }
-            steps{
-                withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh 'kubectl describe service ./blue-green-service.json'
                 }
             }
-        }
 
+        }
     }
 }
