@@ -1,16 +1,8 @@
-FROM php:7.2-apache
+FROM nginx
 
 ## Step 1:
-##RUN rm /var/www/html/index.php
+RUN rm /usr/share/nginx/html/index.html
 
 ## Step 2:
 # Copy source code to working directory
-COPY app/ /var/www/html/
-
-RUN cd /var/www/html/
-RUN ls
-
-WORKDIR /var/www/html/
-
-EXPOSE 80
-
+COPY app/ /usr/share/nginx/html
