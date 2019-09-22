@@ -47,7 +47,7 @@ pipeline{
                 }
             }
         }
-        stage('Create Blue-Green service') {
+        stage('Create Staging service') {
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
