@@ -22,7 +22,7 @@
         "containers": [
           {
             "name": "blueversion",
-            "image": "adamsteff/capstone-blue",
+            "image": "adamsteff/capstonerepository",
             "ports": [
               {
                 "name": "http-server",

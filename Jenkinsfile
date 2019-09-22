@@ -10,7 +10,7 @@ pipeline{
            steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
-                        docker build --no-cache -t adamsteff/capstone-blue:latest .
+                        docker build --no-cache -t adamsteff/capstonerepository:latest .
                     '''
                 }
 
@@ -21,10 +21,9 @@ pipeline{
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        docker push adamsteff/capstone-blue:latest
+                        docker push adamsteff/capstonerepository:latest
                     '''
                 }
-
             }
         }
         stage('Set Kubectl Context to Cluster') {
@@ -38,28 +37,22 @@ pipeline{
             }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
-                    sh '''
-                        ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./blue-controller.json
-                        cat ./blue-controller.json
-                    '''
                     sh 'kubectl apply -f ./blue-controller.json'
+
                 }
             }
         }
         stage('Create Green Controller') {
-                    when {
-                        expression { env.BRANCH_NAME == 'green' }
-                    }
-                    steps{
-                        withAWS(region:'ap-southeast-2',credentials:'aws') {
-                            sh '''
-                                ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./green-controller.json
-                                cat ./green-controller.json
-                            '''
-                            sh 'kubectl apply -f ./green-controller.json'
-                        }
-                    }
+            when {
+                expression { env.BRANCH_NAME == 'green' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl apply -f ./green-controller.json'
+
                 }
+            }
+        }
         stage('Deploy to Production?') {
               when {
                 expression { env.BRANCH_NAME != 'master' }
@@ -71,6 +64,26 @@ pipeline{
                 input 'Deploy to Production?'
                 milestone(2)
               }
+        }
+        stage('Rollout Blue Changes') {
+            when {
+                expression { env.BRANCH_NAME == 'blue' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl rolling-update blueversion --image=adamsteff/capstonerepository:latest'
+                }
+            }
+        }
+        stage('Rollout Green Changes') {
+            when {
+                expression { env.BRANCH_NAME == 'green' }
+            }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstonerepository:latest'
+                }
+            }
         }
         stage('Create Blue-Green service') {
             when {
