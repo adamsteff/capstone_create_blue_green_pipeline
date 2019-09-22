@@ -39,6 +39,9 @@ This step rolls out the last changes which were just push to DockerHub to the bl
 ### Rollout Green Changes
 This step rolls out the last changes which were just push to DockerHub to the green pods using the command `kubectl rolling-update greenversion --image=adamsteff/capstonerepository:latest`
 
+### Create Blue-Green service
+This steps applies the change to loadblancer by running `kubectl apply -f ./blue-green-service.json`
+
 ### Master Branch
 When you code change are commited and push in the master branch the follow steps will occur.
 Lint HTML
