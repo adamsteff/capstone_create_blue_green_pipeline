@@ -45,7 +45,7 @@ This steps applies the change to loadblancer by running `kubectl apply -f ./blue
 ## Usage
 
 ### Master Branch
-- When your code change are commited and push in the master branch the follow steps will occur.
+When your code change are commited and push in the master branch the follow steps will occur.
 - Lint HTML
 - Build Docker Image
 - Push Docker Image
@@ -55,22 +55,22 @@ All the other steps in the pipeline are skipped and no upates to the website wil
 
 ### Blue Branch
 When your code change are commited and push in the blue branch the follow steps will occur.
-Lint HTML
-Build Docker Image
-Push Docker Image
-Set Kubectl Context to Cluster
-Create Blue Controller
-Deploy to Production
-Rollout Blue Changes
-Create Blue-Green service
+- Lint HTML
+- Build Docker Image
+- Push Docker Image
+- Set Kubectl Context to Cluster
+- Create Blue Controller
+- Deploy to Production
+- Rollout Blue Changes
+- Create Blue-Green service
 
 ### Green Branch
 When your code change are commited and push in the green branch the follow steps will occur.
-Lint HTML
-Build Docker Image
-Push Docker Image
-Set Kubectl Context to Cluster
-Create Green Controller
-Deploy to Production
-Rollout Green Changes
-Create Blue-Green service
+- Lint HTML
+- Build Docker Image
+- Push Docker Image
+- Set Kubectl Context to Cluster
+- Create Green Controller
+- Deploy to Production
+- Rollout Green Changes
+- Create Blue-Green service
