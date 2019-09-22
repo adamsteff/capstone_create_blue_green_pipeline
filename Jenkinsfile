@@ -42,6 +42,16 @@ pipeline{
                 }
             }
         }
+        stage('Create Blue Controller') {
+                    when {
+                        expression { env.BRANCH_NAME == 'green' }
+                    }
+                    steps{
+                        withAWS(region:'ap-southeast-2',credentials:'aws') {
+                            sh 'kubectl apply -f ./green-controller.json'
+                        }
+                    }
+                }
         stage('Deploy to Production?') {
               when {
                 expression { env.BRANCH_NAME != 'master' }
