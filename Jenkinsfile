@@ -43,6 +43,7 @@ pipeline{
                         cat ./green-controller.json
                     '''
                     sh 'kubectl apply -f ./blue-controller.json'
+                    sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
                 }
             }
         }
