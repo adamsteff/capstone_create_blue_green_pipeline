@@ -22,7 +22,7 @@
         "containers": [
           {
             "name": "greenversion",
-            "image": "adamsteff/capstone-green",
+            "image": "adamsteff/capstonerepository",
             "ports": [
               {
                 "name": "http-server",

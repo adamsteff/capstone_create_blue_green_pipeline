@@ -10,7 +10,7 @@ pipeline{
            steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
-                        docker build --no-cache -t adamsteff/capstone-green:latest .
+                        docker build --no-cache -t adamsteff/capstonerepository:latest .
                     '''
                 }
 
@@ -21,10 +21,9 @@ pipeline{
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
                     sh '''
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        docker push adamsteff/capstone-green:latest
+                        docker push adamsteff/capstonerepository:latest
                     '''
                 }
-
             }
         }
         stage('Set Kubectl Context to Cluster') {
@@ -72,7 +71,7 @@ pipeline{
             }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
-                    sh 'kubectl rolling-update blueversion --image=adamsteff/capstone-blue:latest'
+                    sh 'kubectl rolling-update blueversion --image=adamsteff/capstonerepository:latest'
                 }
             }
         }
@@ -82,7 +81,7 @@ pipeline{
             }
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
-                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstone-green:latest'
+                     sh 'kubectl rolling-update greenversion --image=adamsteff/capstonerepository:latest'
                 }
             }
         }
