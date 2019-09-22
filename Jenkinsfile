@@ -32,5 +32,17 @@ pipeline{
                 sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
             }
         }
+        stage('Deploy to Production?') {
+          when {
+            expression { env.BRANCH_NAME == 'master' }
+          }
+
+          steps {
+            // Prevent any older builds from deploying to production
+            milestone(1)
+            input 'Deploy to Production?'
+            milestone(2)
+          }
+        }
     }
 }
