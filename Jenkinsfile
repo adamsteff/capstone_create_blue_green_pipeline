@@ -78,7 +78,7 @@ pipeline{
                         sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                         sh 'kubectl apply -f ./blue-green-service.json'
                         sh 'kubectl get pods'
-
+                        sh 'kubectl describe service bluegreenlb4'
                     }
                 }
             }
