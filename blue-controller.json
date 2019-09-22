@@ -2,27 +2,27 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "greenversion",
+    "name": "blueversion",
     "labels": {
-      "app": "greenversion"
+      "app": "blueversion"
     }
   },
   "spec": {
     "replicas": 1,
     "selector": {
-      "app": "greenversion"
+      "app": "blueversion"
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "greenversion"
+          "app": "blueversion"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "greenversion",
-            "image": "adamsteff/capstone-green",
+            "name": "blueversion",
+            "image": "adamsteff/capstone-blue",
             "ports": [
               {
                 "name": "http-server",
