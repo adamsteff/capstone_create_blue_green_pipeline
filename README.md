@@ -1,5 +1,4 @@
-# Udacity Capstone - Cloud DevOps 
-# blue/green CI/CD pipeline
+# Udacity Cloud DevOps Capstone - blue/green CI/CD pipeline
 
 ## Project Overview
 In this project, we had to build a CI/CD pipeline for a microservices application. I've designed this CI/CD pipeline to work with Jenkins, and it follows this blue/green deployment methodology. This project has **three** braches **master**, **blue** & **green**.
