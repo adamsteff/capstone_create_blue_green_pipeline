@@ -37,7 +37,9 @@ pipeline{
                 expression { env.BRANCH_NAME == 'blue' }
             }
             steps{
-                sh 'kubectl apply -f ./blue-controller.json'
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl apply -f ./blue-controller.json'
+                }
             }
         }
         stage('Deploy to Production?') {
