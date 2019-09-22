@@ -24,6 +24,21 @@ This step builds a uploads the new docker image to [DockerHub](https://cloud.doc
 ### Set Kubectl Context to Cluster
 This step switches to the correct cluster using the following command `kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster` 
 
+### Create Blue Controller
+This step creates the blue controller using the following command `kubectl apply -f ./blue-controller.json`
+
+### Create Green Controller
+This step creates the green controller using the following command `kubectl apply -f ./green-controller.json`
+
+### Deploy to Production
+This is an interactive step where the user decides if the changes are to be released to production or not.
+
+### Rollout Blue Changes
+This step rolls out the last changes which were just push to DockerHub to the blue pods using the command `kubectl rolling-update blueversion --image=adamsteff/capstonerepository:latest`
+
+### Rollout Green Changes
+This step rolls out the last changes which were just push to DockerHub to the green pods using the command `kubectl rolling-update greenversion --image=adamsteff/capstonerepository:latest`
+
 ### Master Branch
 When you code change are commited and push in the master branch the follow steps will occur.
 Lint HTML
