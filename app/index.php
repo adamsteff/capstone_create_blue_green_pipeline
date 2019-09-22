@@ -2,7 +2,7 @@
 $variable = "Hello Udacity this is my blue release!!!";
 ?>
 
-
+<!doctype html>
 <html>
 <head>
     <title>Capstone project</title>
