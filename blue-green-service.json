@@ -2,7 +2,7 @@
   "kind":"Service",
   "apiVersion":"v1",
   "metadata":{
-    "name":"bluegreenlb",
+    "name":"bluegreenlb2",
     "annotations":{
       "service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled" : "true",
       "service.beta.kubernetes.io/aws-load-balancer-connection-draining-timeout" : "60",
@@ -20,7 +20,7 @@
   "spec":{
     "ports": [
       {
-        "port":8000,
+        "port":80,
         "targetPort":80
       }
     ],
