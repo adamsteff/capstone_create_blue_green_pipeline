@@ -63,6 +63,11 @@ pipeline{
                     sh 'kubectl apply -f ./blue-green-service.json'
                 }
             }
+            steps{
+                withAWS(region:'ap-southeast-2',credentials:'aws') {
+                    sh 'kubectl describe service ./blue-green-service.json'
+                }
+            }
         }
 
     }
