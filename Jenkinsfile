@@ -61,7 +61,7 @@ pipeline{
             steps{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                         sh 'kubectl apply -f ./blue-green-service.json'
                         sh 'kubectl get pods'
                         sh 'kubectl port-forward bluegreenloadbalancer 8000:80'
