@@ -32,6 +32,14 @@ pipeline{
                 sh 'kubectl config use-context arn:aws:eks:ap-southeast-2:048353547478:cluster/capstonecluster'
             }
         }
+        stage('Create Blue Controller') {
+            when {
+                expression { env.BRANCH_NAME == 'blue' }
+            }
+            steps{
+                sh 'kubectl apply -f ./blue-controller.json'
+            }
+        }
         stage('Deploy to Production?') {
               when {
                 expression { env.BRANCH_NAME == 'master' }
