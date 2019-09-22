@@ -2,27 +2,27 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "green-2",
+    "name": "green",
     "labels": {
-      "app": "green-2"
+      "app": "green"
     }
   },
   "spec": {
     "replicas": 1,
     "selector": {
-      "app": "green-2"
+      "app": "green"
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "green-2"
+          "app": "green"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "green-2",
-            "image": "adamsteff/capstonerepository:3",
+            "name": "green",
+            "image": "adamsteff/capstonerepository:BUILD_ID",
             "ports": [
               {
                 "name": "http-server",
