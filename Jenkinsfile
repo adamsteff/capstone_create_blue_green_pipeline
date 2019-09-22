@@ -42,7 +42,7 @@ pipeline{
                 }
             }
         }
-        stage('Create Blue Controller') {
+        stage('Create Green Controller') {
                     when {
                         expression { env.BRANCH_NAME == 'green' }
                     }
