@@ -3,6 +3,8 @@
 ## Project Overview
 In this project we had to build a CI/CD pipeline for a microservices application. I've designed this CI/CD pipeline to work wth Jenkins and it follows this blue/green deployment methodology. This project has **three** braches **master**, **blue** & **green**.
 
+In terms of the type of application this pipeline is deploying I've decided to create a simple **PHP** application which is built into a docker image. I'm reasons for this is I've a application development by trade and we build our API in **PHP**.
+
 ## Installation
 In order to run this CI/CD pipeline you will first need access to **Jenkins**, and have an **AWS** account. You will also need to install the **Blue Ocean** and **AWS pipline** plugins.
 
@@ -62,7 +64,7 @@ When your code change are commited and push in the blue branch the follow steps 
 - Create Blue Controller
 - Deploy to Production
 - Rollout Blue Changes
-- Create Blue-Green service
+- Create Blue-Green service - the Loadbalancer will be pointed to the blue pods
 
 ### Green Branch
 When your code change are commited and push in the green branch the follow steps will occur.
@@ -73,4 +75,4 @@ When your code change are commited and push in the green branch the follow steps
 - Create Green Controller
 - Deploy to Production
 - Rollout Green Changes
-- Create Blue-Green service
+- Create Blue-Green service - the Loadbalancer will be pointed to the green pods
