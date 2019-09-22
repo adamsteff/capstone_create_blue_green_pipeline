@@ -2,26 +2,26 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "greenbuild",
+    "name": "greenversion",
     "labels": {
-      "app": "greenbuild"
+      "app": "greenversion"
     }
   },
   "spec": {
     "replicas": 1,
     "selector": {
-      "app": "greenbuild"
+      "app": "greenversion"
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "greenbuild"
+          "app": "greenversion"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "greenbuild",
+            "name": "greenversion",
             "image": "adamsteff/capstone-green",
             "ports": [
               {
