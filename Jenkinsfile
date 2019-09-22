@@ -65,7 +65,7 @@ pipeline{
                         sh 'kubectl apply -f ./blue-green-service.json'
                         sh 'kubectl get pods'
                         sh 'kubectl port-forward bluegreenloadbalancer 8000:80'
-                        sh 'kubectl describe service bluegreenloadbalancer'
+                        sh 'kubectl describe service green-xlbx2'
                     }
                 }
             }
