@@ -40,7 +40,7 @@ pipeline{
                 withAWS(region:'ap-southeast-2',credentials:'aws') {
                     sh '''
                         ##sed -i 's/BUILD_ID/'$BUILD_ID'/g' ./blue-controller.json
-                        cat ./green-controller.json
+                        cat ./blue-controller.json
                     '''
                     sh 'kubectl apply -f ./blue-controller.json'
                 }
