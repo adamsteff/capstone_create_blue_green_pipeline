@@ -1,13 +1,15 @@
 <?php
-$variable = "Hello World this is my green release";
+$variable = "Hello World this is my Green release";
 ?>
 
 <!doctype html>
 <html>
 <head>
-    <title>Capstone project Updated</title>
+    <title>Capstone project</title>
 </head>
 <body style="color='green' text-align='center' ">
-<?php echo $variable;?>
+<h1 style="color: green">
+    <?php echo $variable;?>
+</h1>
 </body>
 </html>
