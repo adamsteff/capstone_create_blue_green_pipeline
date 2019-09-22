@@ -22,7 +22,7 @@
         "containers": [
           {
             "name": "greenbuild",
-            "image": "adamsteff/capstone-green:BUILD_ID",
+            "image": "adamsteff/capstone-green",
             "ports": [
               {
                 "name": "http-server",
