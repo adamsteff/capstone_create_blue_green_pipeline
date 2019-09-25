@@ -1,5 +1,5 @@
 <?php
-$variable = "This is my new changes to the website.";
+$variable = "This is my new changes to the website...";
 ?>
 
 <!doctype html>
