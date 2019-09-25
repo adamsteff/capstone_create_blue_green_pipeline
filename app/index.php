@@ -1,5 +1,5 @@
 <?php
-$variable = "Hello Udacity this is my blue release!!! My name is Adam Steff";
+$variable = "Blue webbsites changes";
 ?>
 
 <!doctype html>
